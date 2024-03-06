@@ -3,6 +3,8 @@ package com.auth.sample.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,6 +36,7 @@ public class SiteUser {
     private String email;
 
     @NotEmpty
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
