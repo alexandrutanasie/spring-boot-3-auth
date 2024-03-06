@@ -32,14 +32,13 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 (authorize) -> authorize
-                                .requestMatchers("/theme/**")
-                                .permitAll()
-                                .anyRequest().authenticated()
+                                .requestMatchers("/auth/**").authenticated()
+                                .anyRequest().permitAll()
         ).formLogin(
                 form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/")
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/auth/login")
+                        .defaultSuccessUrl("/auth/")
                         .permitAll()
         ).rememberMe(
                 (remember) -> remember
@@ -49,7 +48,7 @@ public class SpringSecurity {
 
         ).logout(
                 logout -> logout
-                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
                             .permitAll()
                 );
         return http.build();
